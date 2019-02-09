@@ -35,7 +35,7 @@ public class AdventureTextGames {
         /*
         Ketika menjalan kan file ini
         akan muncul menu berikut
-        user memilih mau mulai atai tidak
+        user memilih mau mulai atau tidak
         Mulai = 1
         Exit = 2
          */
