@@ -29,12 +29,21 @@ public class AdventureTextGames {
         int heroAttackDamage = 50;
         int numHealthPotions = 3;
         int healthPotionHealAmount = 30;
-        int healthPotionDropChance = 50;
+        int healthPotionDropChance = 30;
 
-        boolean start = true;
+        boolean start;
 
         System.out.println("####### Welcome to the Dungeon!");
-
+        System.out.println("####### Start the journey?!");
+        System.out.println("####### > 1. Start");
+        System.out.println("####### > 2. Exit");
+        System.out.print("####### > ");
+        String inputs = sn.nextLine();
+        if (inputs.equals("1")) {
+            start = true;
+        } else {
+            start = false;
+        }
         GAME:
         while (start) {
             System.out.println("=============================================");
@@ -109,6 +118,8 @@ public class AdventureTextGames {
             String input = sn.nextLine();
             while (!input.equals("1") && !input.equals("2")) {
                 System.out.println("Invalid command");
+                System.out.print("hero@dungeon: ");
+
                 input = sn.nextLine();
             }
 
@@ -116,6 +127,7 @@ public class AdventureTextGames {
                 System.out.println("You take another step through the dungeon");
                 continue;
             } else if (input.equals("2")) {
+                System.out.println("#########################################");
                 System.out.println("That's was a nice story. ~Fin");
                 break;
             }
