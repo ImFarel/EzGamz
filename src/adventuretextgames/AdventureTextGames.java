@@ -38,18 +38,21 @@ public class AdventureTextGames {
         GAME:
         while (start) {
             System.out.println("=============================================");
+
             int enemyHealth = rn.nextInt(maxEnemyHealth);
             String enemy = enemies[rn.nextInt(enemies.length)];
-            System.out.println("\t#" + enemy + " has appeared ! #\n");
+
+            System.out.println("\n\t#" + enemy + " has appeared ! #\n");
             while (enemyHealth > 0) {
 //                System.out.println("\t");
+                System.out.println("\tYour HP: " + heroHealth);
                 System.out.println("\t" + enemy + "'s HP: " + enemyHealth);
+
                 System.out.println("\n\tWhat would you like to do?");
-                System.out.println("\t" + enemy + "'s HP: " + enemyHealth);
-                System.out.println("\t1. Attacc");
-                System.out.println("\t2. Drink health potion");
-                System.out.println("\t3. Run!");
-                System.out.print("@Hero : ");
+                System.out.println("\t1. Attack");
+                System.out.println("\t2. Drink health potion(" + numHealthPotions + " now).");
+                System.out.println("\t3. Run!\n");
+                System.out.print("\thero@dungeon: #");
                 String input = sn.nextLine();
 
                 if (input.equals("1")) {
@@ -59,24 +62,68 @@ public class AdventureTextGames {
                     enemyHealth -= damageDealt;
                     heroHealth -= damageTaken;
 
-                    System.out.println("\t> You hit the " + enemy + ". " + damageDealt + " damage dealt.");
-                    System.out.println("\t> You recieve the " + damageTaken + " in retaliation!.");
+                    System.out.println("\n\t> You hit the " + enemy + ". " + damageDealt + " damage dealt.");
+                    System.out.println("\t> You recieve " + damageTaken + " damage in the figth!.");
 
                     if (heroHealth < 1) {
-                        System.out.println("\t> You are too week to go on");
+                        System.out.println("\t> You are too week to go on\n");
+                        break;
                     }
 
                 } else if (input.equals("2")) {
                     if (numHealthPotions > 0) {
                         heroHealth += healthPotionHealAmount;
                         numHealthPotions--;
-                        System.out.println("\t> You drink a health potion");
+                        System.out.println("\n\t> You drink a health potion. " + healthPotionHealAmount + "+ to your current HP"
+                                + "\n\tHP now " + heroHealth
+                                + "\n\tAmount Health Potions now " + numHealthPotions + "\n");
+                    } else {
+                        System.out.println("\n\t> You dont have any health potion anymore. Kill enemy for a chance get health potion\n");
                     }
 
                 } else if (input.equals("3")) {
+                    System.out.println("\t>You run away from the " + enemy + "");
+                    System.out.println("=============================================");
+                    continue GAME;
+                } else {
+                    System.out.println("\tInvalid command\n");
                 }
             }
-        }
-    }
+            if (heroHealth < 1) {
+                System.out.println(">You are too week for the battle.\n");
+                break;
+            }
+            System.out.println("=============================================");
+            System.out.println("# " + enemy + " was defeated #");
+            System.out.println("# Your health : " + heroHealth + " Left");
+            if (rn.nextInt(100) > healthPotionDropChance) {
+                numHealthPotions++;
+                System.out.println("# The " + enemy + " dropped a health potion! #");
+                System.out.println("# Now you have " + numHealthPotions + " health potion(s). #");
+            }
+            System.out.println("=============================================");
+            System.out.println("What your next move?");
+            System.out.println("1. Continue fighting");
+            System.out.println("2. End the journey");
+            System.out.print("hero@dungeon: ");
+            String input = sn.nextLine();
+            while (!input.equals("1") && !input.equals("2")) {
+                System.out.println("Invalid command");
+                input = sn.nextLine();
+            }
 
+            if (input.equals("1")) {
+                System.out.println("You take another step through the dungeon");
+                continue;
+            } else if (input.equals("2")) {
+                System.out.println("That's was a nice story. ~Fin");
+                break;
+            }
+        }
+        System.out.println("###############");
+        System.out.println("Thanks!");
+        System.out.println("Inspired by : https://www.youtube.com/watch?v=EpB9u4ItOYU");
+        System.out.println("Re-coded");
+
+    }
 }
